@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+<style type="text/css">
+body {margin:0;}
+.wrap{width:100%;margin:0 auto;}
+.battlefield{width:100%;min-height:450px; height:60vh; background: url(/images/floor.gif) repeat;}
+.menu{width:100%;min-height:250px; height:40vh;background:#000;padding-top:0px;position:relative;box-sizing:border-box;font-family: 'Press Start 2P', cursive; color:#fff;}
+.menu > ul {margin:0; position:absolute; width:40%; top:0px; left:0px; width:calc(40% - 2px); padding:0 0 0 50px; box-sizing:border-box}
+.menu ul ul { position:inherit; }
+.menu > ul, .points { background: rgb(148,154,224); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(148,154,224,1) 0%, rgba(0,1,114,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(148,154,224,1) 0%,rgba(0,1,114,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(148,154,224,1) 0%,rgba(0,1,114,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#949ae0', endColorstr='#000172',GradientType=0 );
+border: 3px solid #fff; border-radius:5px; box-sizing:border-box; padding:20px 50px; min-height:320px;
+ }
+.menu li a { color:#fff; text-decoration:none; }
+.menu li {list-style:none;color:#fff; line-height:24px;}
+.goodies { width:50%; float:left; height:300px; padding-top:50px; }
+.baddies { width:50%; float:right; height:300px; padding:50px 50px 0 0; box-sizing:border-box; }
+.goodies img {float:left;clear:both;}
+.points{position:absolute;top:0px;right:0px; width:60%;}
+.points p { color:#fff; width: 400px; }
+.points span {width:100px; text-align:right; display:inline-block; float:right;}
+.menu li a.wait { color: #999; }
+.sam-menu, .dane-menu, .trist-menu {border: 3px solid white;width: 200px; border-radius:5px; padding:15px; background: rgb(148,154,224); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(148,154,224,1) 0%, rgba(0,1,114,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(148,154,224,1) 0%,rgba(0,1,114,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(148,154,224,1) 0%,rgba(0,1,114,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#949ae0', endColorstr='#000172',GradientType=0 ); }
+.wait-turn { display:none!important; }
+.enemy {float:right; margin-top:80px }
+.dragon {display:none;}
+.sam, .trist, .dane, .dragon, .enemy { transition:500ms;}
+.fireball { position:absolute; left:150px; transition:1000ms; opacity:0; transition-timing-function: linear;}
+.hitpoints { color: #fff; font-family: 'Press Start 2P', cursive; position:absolute; right:110px; top:100px; opacity:0; animation-name: bounce; animation-duration:1s;}
+
+@keyframes bounce {
+	0% { top:70px;opacity:0 }
+	33% { top: 100px;opacity:1;}
+	66% { top:80px;}
+	90% {opacity:1;}
+	100% { top: 100px; opacity:0;}	
+}
+
+</style>
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.11.1.min.js'></script>
+<script type="text/javascript">
+
+hp=100;
+samhp=100;
+danehp=100;
+tristhp=100;
+enemy=100;
+mp=100;
+hitPoint=Math.floor(Math.random() * (20 - 10) + 10); // generate random number between 10 and 20
+
+$(document).ready(function() {
+
+//Enemy chooses target
+function chooseTarget() {
+	pickedPlayer=Math.floor(Math.random() * 3) + 1; // generate random number between 1 and 3
+	
+
+	if(pickedPlayer === 1) {
+		enemyAttack(samhp,'sam-points');
+		samhp=health
+	} else if(pickedPlayer === 2) {
+		enemyAttack(danehp, 'dane-points');
+		danehp=health
+	} else if(pickedPlayer === 3) {
+		enemyAttack(tristhp, 'tristan-points');
+		tristhp=health
+	}	
+	
+	
+}
+
+function damagePoints() {
+	var pointBox = $("<div class='hitpoints'>" + hitPoint + "</div>");
+	$(".battlefield").append(pointBox);
+	setTimeout(function() {
+        pointBox.remove();
+    }, 2000);
+}
+
+
+function fireBall(ballTop) {
+    var fire = $("<img src='/images/fireball.gif' class='fireball hide'>");
+	setTimeout(function() {
+	setTimeout(function() {
+    $(".battlefield").append(fire);
+	$(fire).css({
+   'top' : ballTop,
+   'opacity' : '0.7'
+	});
+    setTimeout(function() {
+		
+	$(fire).css({
+   'opacity' : '1',
+   'left' : '80%',
+   'top' : ballTop
+	});
+		setTimeout(function() {
+        fire.remove();
+		damagePoints();
+    }, 1100);
+    }, 10);
+	}, 10);
+	}, 500);
+}
+
+
+
+//Enemy attack function
+function enemyAttack(newTarget,menuName) {
+	if ( $('.enemy').hasClass( "hold-turn" ) ) {
+	} else {
+	
+	
+	
+	hitPoint=Math.floor(Math.random() * (20 - 10) + 10); // generate random number between 10 and 20	
+	
+	health=newTarget - hitPoint;
+	
+	
+	
+	
+	if(newTarget < 0) { //If the players is dead
+		 $('.battlefield').css( "background", "red" ); // Move character into battle
+		 $('.' + menuName ).find('span').empty(); //remove previous enemey health
+		  $('.' + menuName ).find('span').append('0');
+	 }
+	 else {
+	
+		 $('.' + menuName ).find('span').empty(); //remove previous enemey health
+		 $('.' + menuName ).find('span').append(health);
+    $('.enemy').css( "margin-right", "100px" );
+	setTimeout(function() {
+	$('.enemy').css( "margin-right", "0px" ); //Move character back
+}, 2000);
+	
+	 }
+	return health;
+	}
+};
+setInterval(chooseTarget, 3000);
+
+
+//Summon Attack
+function summonAttack() {
+hitPoint=Math.floor(Math.random() * (20 - 10) + 10); // generate random number between 10 and 20
+enemy=enemy - hitPoint; // Reduce attack damage from enemy HP
+$('.sam, .trist, .dane').fadeOut(1000); //step 1
+setTimeout(function(){ //step 2
+$('.dragon').fadeIn(1000); 
+setTimeout(function() { //step 3
+$('.dragon').css( "margin-left", "100px" );
+$('.enemyhp').find('span').empty(); //remove previous enemey health
+$('.enemyhp').find('span').append(enemy);
+setTimeout(function() { //step 4
+damagePoints();
+$('.dragon').css( "margin-left", "0px" ); //Move character back
+setTimeout(function(){ //step 5
+$('.dragon').fadeOut(1000);
+setTimeout(function(){ //step 6
+$('.sam, .trist, .dane').fadeIn(1000);
+},2000);
+},1000);
+},1000);
+},2000);
+},2000);
+
+
+
+
+}
+
+//Show Player Menu
+/*
+function menuOptions() {
+	if($('.dane-menu, .trist-menu').hasClass('wait-turn')) {
+	$('.sam-menu').css("display","block");
+	$(".sam-menu").removeClass('wait-turn');
+	}
+	else if($('.sam-menu, .trist-menu').hasClass('wait-turn')){
+	$('.dane-menu').css("display","block");
+	$(".dane-menu").removeClass('wait-turn');
+	}
+	else if($('.sam-menu, .dane-menu').hasClass('wait-turn')){
+	$('.dane-menu').css("display","block");
+	$(".dane-menu").removeClass('wait-turn');
+	}
+};
+setInterval(menuOptions, 3000);
+*/
+// Summon Button
+$(document).on('click', '.summon', function(){ 
+$('.enemy').addClass('hold-turn');
+summonAttack();
+if ($(this).parents('.sam-menu').length) {
+	nextMenu=$('.dane-menu');
+	}
+	else if ($(this).parents('.dane-menu').length) {
+	nextMenu=$('.trist-menu');
+	}
+	else{
+	nextMenu=$('.sam-menu');
+	}
+$(this).parent().parent().addClass('wait-turn');
+setTimeout(function(){
+	$(nextMenu).removeClass('wait-turn');
+	$('.enemy').removeClass('hold-turn');
+},9000);
+});
+// Attack Button
+$(document).on('click', '.attack', function(){ 
+	enemy=enemy - hitPoint; // Reduce attack damage from enemy HP
+	player=""
+	//Determine which player is attacking
+	if ($(this).parents('.sam-menu').length) {
+	player=$('.sam');
+	menu=$('.sam-menu');
+	nextMenu=$('.dane-menu');
+	playerhp=samhp
+	ballTop="100px"
+	}
+	else if ($(this).parents('.dane-menu').length) {
+	player=$('.dane');
+	menu=$('.dane-menu');
+	nextMenu=$('.trist-menu');
+	playerhp=danehp
+	ballTop="200px"
+	}
+	else{
+	player=$('.trist');
+	menu=$('.trist-menu');
+	nextMenu=$('.sam-menu');
+	playerhp=tristhp
+	ballTop="300px"
+	}
+	playerhp=playerhp - hitPoint;
+	$(player).css( "margin-left", "100px" ); // Move character into battle
+	$(player).attr("src","/images/sprite-hit.gif");
+	fireBall(ballTop);
+	
+	$('.enemyhp').find('span').empty(); //remove previous enemey health
+	$('.enemyhp').find('span').append(enemy);
+
+	$(this).parent().parent().addClass('wait-turn');
+	setTimeout(function() {
+		
+	$(player).css( "margin-left", "0px" ); //Move character back
+	$(player).attr("src","/images/sprite.gif");
+	$(nextMenu).removeClass('wait-turn');
+}, 3000);
+ });
+ 
+
+ 
+ 
+});
+</script>
+</head>
+
+<body>
+<div class="wrap">
+<div class="battlefield">
+<div class="goodies">
+<img class="dragon" src="/images/dragon.png">
+<img src="/images/ready.gif"  class="sam" >
+<img src="/images/sprite.gif"  class="dane" width="100" height="120">
+<img src="/images/sprite.gif"  class="trist" width="100" height="120">
+</div>
+<div class="baddies">
+<img src="/images/enemy.gif" class="enemy" width="100" height="200">
+</div>
+</div>
+<div class="menu">
+<ul>
+<li>Soldier
+<ul class="sam-menu">
+<li><a href="#" class="attack">Attack</a></li>
+<li><a href="#" class="magic">Magic</a></li>
+<li><a href="#" class="summon">Summon</a></li>
+<li><a href="#" class="item">Item</a></li>
+</ul></li>
+<li>Mage
+<ul class="dane-menu wait-turn">
+<li><a href="#" class="attack">Attack</a></li>
+<li><a href="#" class="magic">Magic</a></li>
+<li><a href="#" class="summon">Summon</a></li>
+<li><a href="#" class="item">Item</a></li>
+</ul></li>
+<li>Thief
+<ul class="trist-menu wait-turn">
+<li><a href="#" class="attack">Attack</a></li>
+<li><a href="#" class="magic">Magic</a></li>
+<li><a href="#" class="summon">Summon</a></li>
+<li><a href="#" class="item">Item</a></li>
+</ul></li>
+</ul>
+	<div class="points">
+        <p class="sam-points">Soldier HP: <span>100</span></p>
+        <p class="dane-points">Mage HP: <span>100</span></p>
+        <p class="tristan-points">Thief HP: <span>100</span></p>
+        <p class="enemyhp">Enemy HP: <span>100</span></p>
+    </div>
+</div>
+</div>
+</body>
+</html>
