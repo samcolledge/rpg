@@ -9,7 +9,7 @@ body {
   width: 100%;
   min-height: 450px;
   height: 60vh;
-  background: url(/images/floor.gif) repeat; }
+  background: url(../images/floor.gif) repeat; }
 
 .menu {
   width: 100%;
@@ -209,7 +209,7 @@ li.active {
     width: 47px;
     height: 24px;
     display: block;
-    background: url("/images/cursor.png") no-repeat;
+    background: url("../images/cursor.png") no-repeat;
     position: absolute;
     left: -52px;
     top: 7px; }
