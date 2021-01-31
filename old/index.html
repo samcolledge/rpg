@@ -7,7 +7,7 @@
 <style type="text/css">
 body {margin:0;}
 .wrap{width:100%;margin:0 auto;}
-.battlefield{width:100%;min-height:450px; height:60vh; background: url(/images/floor.gif) repeat;}
+.battlefield{width:100%;min-height:450px; height:60vh; background: url(../images/floor.gif) repeat;}
 .menu{width:100%;min-height:250px; height:40vh;background:#000;padding-top:0px;position:relative;box-sizing:border-box;font-family: 'Press Start 2P', cursive; color:#fff;}
 .menu > ul {margin:0; position:absolute; width:40%; top:0px; left:0px; width:calc(40% - 2px); padding:0 0 0 50px; box-sizing:border-box}
 .menu ul ul { position:inherit; }
@@ -245,7 +245,7 @@ $(document).on('click', '.attack', function(){
 	}
 	playerhp=playerhp - hitPoint;
 	$(player).css( "margin-left", "100px" ); // Move character into battle
-	$(player).attr("src","/images/sprite-hit.gif");
+	$(player).attr("src","../images/sprite-hit.gif");
 	fireBall(ballTop);
 	
 	$('.enemyhp').find('span').empty(); //remove previous enemey health
@@ -255,7 +255,7 @@ $(document).on('click', '.attack', function(){
 	setTimeout(function() {
 		
 	$(player).css( "margin-left", "0px" ); //Move character back
-	$(player).attr("src","/images/sprite.gif");
+	$(player).attr("src","../images/sprite.gif");
 	$(nextMenu).removeClass('wait-turn');
 }, 3000);
  });
@@ -272,12 +272,12 @@ $(document).on('click', '.attack', function(){
 <div class="battlefield">
 <div class="goodies">
 <img class="dragon" src="/images/dragon.png">
-<img src="/images/ready.gif"  class="sam" >
-<img src="/images/sprite.gif"  class="dane" width="100" height="120">
-<img src="/images/sprite.gif"  class="trist" width="100" height="120">
+<img src="../images/ready.gif"  class="sam" >
+<img src="../images/sprite.gif"  class="dane" width="100" height="120">
+<img src="../images/sprite.gif"  class="trist" width="100" height="120">
 </div>
 <div class="baddies">
-<img src="/images/enemy.gif" class="enemy" width="100" height="200">
+<img src="../images/enemy.gif" class="enemy" width="100" height="200">
 </div>
 </div>
 <div class="menu">

@@ -70,8 +70,8 @@
   health: 100,
   magic: 100,
   menu: ".soldier__menu",
-  idleSprite: "/images/sprite.gif",
-  attackSprite: "/images/sprite-hit.gif",
+  idleSprite: "../images/sprite.gif",
+  attackSprite: "../images/sprite-hit.gif",
   magicSprite: "",
   itemSprite: "",
   deathSprite: "",
@@ -81,8 +81,8 @@
   health: 100,
   magic: 100,
   menu: ".mage__menu",
-  idleSprite: "/images/sprite-mage.gif",
-  attackSprite: "/images/sprite-hit.gif",
+  idleSprite: "../images/sprite-mage.gif",
+  attackSprite: "../images/sprite-hit.gif",
   magicSprite: "",
   itemSprite: "",
   deathSprite: "",
@@ -92,8 +92,8 @@
   health: 100,
   magic: 100,
   menu: ".thief__menu",
-  idleSprite: "/images/sprite.gif",
-  attackSprite: "/images/sprite-hit.gif",
+  idleSprite: "../images/sprite.gif",
+  attackSprite: "../images/sprite-hit.gif",
   magicSprite: "",
   itemSprite: "",
   deathSprite: "",
@@ -102,8 +102,8 @@
   name: "Enemy",
   health: 100,
   magic: 100,
-  idleSprite: "/images/enemy.gif",
-  attackSprite: "/images/sprite-hit.gif",
+  idleSprite: "../images/enemy.gif",
+  attackSprite: "../images/sprite-hit.gif",
   magicSprite: "",
   itemSprite: "",
   deathSprite: "",
@@ -136,7 +136,7 @@ function menuOption(clicked, characterName, nextCharacter, currentCharacter){
 	
 	if(clicked === "attack") {
         var thisCharacter = document.querySelector('.' + characterName);
-        var fire = "<img src='/images/fireball.gif' class='fireball'>"
+        var fire = "<img src='../images/fireball.gif' class='fireball'>"
 		
 		thisCharacter.children[0].src=eval(characterName).attackSprite
         setTimeout(function(){  
