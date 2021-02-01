@@ -74,7 +74,7 @@ function damagePoints() {
 
 
 function fireBall(ballTop) {
-    var fire = $("<img src='/images/fireball.gif' class='fireball hide'>");
+    var fire = $("<img src='images/fireball.gif' class='fireball hide'>");
 	setTimeout(function() {
 	setTimeout(function() {
     $(".battlefield").append(fire);
@@ -226,7 +226,7 @@ $(document).on('click', '.attack', function(){
 	}
 	playerhp=playerhp - hitPoint;
 	$(player).css( "margin-left", "100px" ); // Move character into battle
-	$(player).attr("src","/images/sprite-hit.gif");
+	$(player).attr("src","images/sprite-hit.gif");
 	fireBall(ballTop);
 	
 	$('.enemyhp').find('.health-indicator').empty(); //remove previous enemey health
@@ -238,7 +238,7 @@ $(document).on('click', '.attack', function(){
 	setTimeout(function() {
 		
 	$(player).css( "margin-left", "0px" ); //Move character back
-	$(player).attr("src","/images/sprite.gif");
+	$(player).attr("src","images/sprite.gif");
 	$(nextMenu).removeClass('wait-turn');
 	$(timeBar).addClass('active'); 
 }, 3000);
